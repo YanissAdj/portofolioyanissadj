@@ -15,7 +15,7 @@
             <a href="index.html" class="logo">Y.A</a>
             <div class="nav-links">
                 <a href="about.html">À propos</a>
-                <a href="projects.html">Projets</a>
+                <a href="bts-sio.html">BTS SIO</a>
                 <a href="epreuve-e5.html">Épreuve E5</a>
                 <a href="epreuve-e6.html">Épreuve E6</a>
                 <a href="veille.html">Veille Technologique</a>
@@ -32,51 +32,94 @@
         <div class="container">
             <h2 class="section-title">Épreuve E5</h2>
             <div class="epreuve-content">
-                <div class="epreuve-description">
-                    <p>
-                        L'épreuve E5 évalue ma capacité à réaliser un projet professionnel en situation réelle.
-                        Cette épreuve met en avant mes compétences techniques et ma capacité à gérer un projet
-                        de bout en bout.
+                <div class="epreuve-header">
+                    <div class="epreuve-kicker">BLOC « SUPPORT ET MISE À DISPOSITION DE SERVICES INFORMATIQUES »</div>
+                    <p class="epreuve-lead">
+                        Réalisation et présentation de deux réalisations professionnelles
                     </p>
                 </div>
 
-                <!-- Projet Principal -->
-                <div class="epreuve-project">
-                    <h3>Projet de Sécurisation d'Infrastructure</h3>
-                    <div class="epreuve-tags">
-                        <span class="project-tag">Sécurité</span>
-                        <span class="project-tag">Réseaux</span>
-                        <span class="project-tag">Windows Server</span>
+                <div class="epreuve-block">
+                    <h3>Objectif</h3>
+                    <p>
+                        Cette page présente l’épreuve E5 et le format de mon dossier. Elle met en avant mes réalisations professionnelles
+                        et les compétences mobilisées.
+                    </p>
+                    <ul>
+                        <li>Analyser un besoin et proposer une solution</li>
+                        <li>Mettre en œuvre et valider la solution</li>
+                        <li>Documenter, présenter et justifier les choix</li>
+                    </ul>
+                </div>
+
+                <div class="epreuve-block">
+                    <h3>Modalités d’évaluation</h3>
+                    <p>
+                        L’épreuve s’appuie sur deux réalisations professionnelles décrites dans le dossier et présentées à l’oral.
+                    </p>
+                    <div class="epreuve-phases">
+                        <div class="epreuve-phase">
+                            <h4>Présentation et échanges</h4>
+                            <ul>
+                                <li>Contexte et objectifs de chaque réalisation</li>
+                                <li>Choix techniques et justification</li>
+                                <li>Démonstration / preuves (captures, logs, schémas)</li>
+                            </ul>
+                        </div>
+                        <div class="epreuve-phase">
+                            <h4>Entretien</h4>
+                            <ul>
+                                <li>Questions sur la démarche, la sécurité, la maintenance</li>
+                                <li>Retour d’expérience et axes d’amélioration</li>
+                            </ul>
+                        </div>
                     </div>
-                    <p>
-                        Dans le cadre de mon stage en entreprise, j'ai réalisé un projet de sécurisation
-                        d'infrastructure réseau. Ce projet comprenait :
-                    </p>
-                    <ul>
-                        <li>Audit de sécurité initial</li>
-                        <li>Mise en place de politiques de sécurité</li>
-                        <li>Configuration de pare-feu et systèmes de détection d'intrusion</li>
-                        <li>Formation des utilisateurs aux bonnes pratiques</li>
-                    </ul>
                 </div>
 
-                <!-- Compétences Développées -->
-                <div class="epreuve-project">
-                    <h3>Compétences Développées</h3>
-                    <ul>
-                        <li>Analyse de risques et vulnérabilités</li>
-                        <li>Configuration de solutions de sécurité</li>
-                        <li>Documentation technique</li>
-                        <li>Communication avec les équipes</li>
-                    </ul>
+                <div class="epreuve-block">
+                    <h3>Projet 1</h3>
+                    <div class="epreuve-subblocks">
+                        <div class="epreuve-subblock">
+                            <h4>Situation professionnelle</h4>
+                            <p>À compléter : contexte, besoin, contraintes, résultats attendus.</p>
+                        </div>
+                        <div class="epreuve-subblock">
+                            <h4>Documentation</h4>
+                            <p>À compléter : procédures, captures, schémas, livrables.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="epreuve-block">
+                    <h3>Projet 2</h3>
+                    <div class="epreuve-subblocks">
+                        <div class="epreuve-subblock">
+                            <h4>Situation professionnelle</h4>
+                            <p>À compléter : contexte, besoin, contraintes, résultats attendus.</p>
+                        </div>
+                        <div class="epreuve-subblock">
+                            <h4>Documentation</h4>
+                            <p>À compléter : procédures, captures, schémas, livrables.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Documents -->
                 <div class="epreuve-download">
                     <h3>Documents de l'Épreuve</h3>
                     <p>Vous pouvez télécharger les documents relatifs à cette épreuve :</p>
-                    <a href="#" class="btn btn-sm">Rapport de Stage</a>
-                    <a href="#" class="btn btn-sm">Présentation</a>
+                    <div class="epreuve-docs">
+                        <button type="button" class="btn btn-sm" data-doc="docs/Attestation-de-presence-en-entreprise.pdf">Attestation de présence en entreprise</button>
+                        <button type="button" class="btn btn-sm" data-doc="docs/Attestation-de-stage.pdf">Attestation de stage</button>
+                        <button type="button" class="btn btn-sm" data-doc="docs/Tableau-de-synthese-E5.pdf">Tableau de Synthèse E5</button>
+                    </div>
+
+                    <div id="docViewer" class="cv-content doc-viewer" style="display: none;">
+                        <div class="doc-viewer-actions">
+                            <button id="docClose" type="button" class="btn btn-sm">Fermer</button>
+                        </div>
+                        <iframe id="docFrame" src="" width="100%" height="800px" frameborder="0"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,5 +140,30 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        (function () {
+            const viewer = document.getElementById('docViewer');
+            const frame = document.getElementById('docFrame');
+            const closeBtn = document.getElementById('docClose');
+            const buttons = document.querySelectorAll('.epreuve-docs [data-doc]');
+
+            function openDoc(src) {
+                frame.src = src;
+                viewer.style.display = 'block';
+                viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            function closeDoc() {
+                viewer.style.display = 'none';
+                frame.src = '';
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => openDoc(btn.getAttribute('data-doc')));
+            });
+
+            closeBtn.addEventListener('click', closeDoc);
+        })();
+    </script>
 </body>
 </html> 

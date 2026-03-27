@@ -45,7 +45,7 @@ const observer = new IntersectionObserver((entries, observer) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.project-card, .about-content > div').forEach(el => {
+document.querySelectorAll('.about-content > div').forEach(el => {
     observer.observe(el);
 });
 

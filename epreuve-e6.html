@@ -83,39 +83,66 @@
                 </div>
 
                 <div class="epreuve-block">
-                    <h3>Projet 1</h3>
+                    <h3>Projet 1 : Configuration d'un réseau VLAN</h3>
                     <div class="epreuve-subblocks">
                         <div class="epreuve-subblock">
                             <h4>Situation professionnelle</h4>
-                            <p>À compléter : contexte, besoin, contraintes, résultats attendus.</p>
+                            <p>
+                                Dans le cadre du projet M2L, j’ai été chargé de mettre en place une infrastructure réseau 
+                                segmentée afin de résoudre des problèmes de sécurité, de performances et d’administration 
+                                liés à un réseau unique. Ma mission consistait à créer plusieurs VLANs correspondant aux 
+                                différents services, configurer les commutateurs et mettre en place le routage inter-VLAN 
+                                via un routeur Cisco. Cette solution a permis d’isoler les flux, d’améliorer la sécurité 
+                                et de faciliter la gestion du réseau.
+                            </p>
+                            <a href="https://drive.google.com/drive/folders/1JMzpsLU8cwmgSri1asSLOw5JDwP6g5nI?usp=drive_link" target="_blank" class="btn btn-sm" style="margin-top: 3.5rem; padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                                <i class="fas fa-external-link-alt"></i> Documentation
+                            </a>
                         </div>
                         <div class="epreuve-subblock">
-                            <h4>Documentation</h4>
-                            <p>À compléter : schémas, procédures, captures, livrables.</p>
+                            <h4>Architecture</h4>
+                            <img src="images/VLAN_E6.png" alt="Schéma architecture VLAN" class="schema-image">
                         </div>
                     </div>
                 </div>
 
                 <div class="epreuve-block">
-                    <h3>Projet 2</h3>
+                    <h3>Projet 2 : Mise en place et configuration de GLPI</h3>
                     <div class="epreuve-subblocks">
                         <div class="epreuve-subblock">
                             <h4>Situation professionnelle</h4>
-                            <p>À compléter : contexte, besoin, contraintes, résultats attendus.</p>
+                            <p>
+								Dans ce même contexte M2L, j'ai mis en place une solution de gestion de parc informatique et de support utilisateur avec GLPI, 
+                                afin de répondre au manque d'outil de suivi des incidents et d'inventaire. J'ai installé un serveur LAMP sous Debian, déployé GLPI, 
+                                configuré la base de données, intégré l'outil à Active Directory via LDAP et mis en place le système de ticketing ainsi que l'inventaire automatique des machines.
+                                Cette solution permet aux utilisateurs de déclarer leurs incidents et aux administrateurs de gérer efficacement le parc informatique.
+                            </p>
+                            <a href="https://drive.google.com/drive/folders/1JMzpsLU8cwmgSri1asSLOw5JDwP6g5nI?usp=drive_link" target="_blank" class="btn btn-sm" style="margin-top: 3.5rem; padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                                <i class="fas fa-external-link-alt"></i> Documentation
+                            </a>
                         </div>
                         <div class="epreuve-subblock">
-                            <h4>Documentation</h4>
-                            <p>À compléter : schémas, procédures, captures, livrables.</p>
+                            <h4>Architecture</h4>
+                            <img src="images/GLPI_E6.png" alt="Schéma architecture GLPI" class="schema-image">
                         </div>
                     </div>
                 </div>
-
+ 
                 <!-- Documents -->
                 <div class="epreuve-download">
                     <h3>Documents de l'Épreuve</h3>
-                    <p>Vous pouvez télécharger les documents relatifs à cette épreuve :</p>
-                    <a href="#" class="btn btn-sm">Tableau de Synthèse</a>
-                    <a href="#" class="btn btn-sm">Présentation</a>
+                    <p>Consultez les fiches détaillées de mes deux réalisations professionnelles :</p>
+                    <div class="epreuve-docs">
+                        <button type="button" class="btn btn-sm" data-doc="docs/E6_SISR-VLAN.pdf">Fiche 1</button>
+                        <button type="button" class="btn btn-sm" data-doc="docs/E6_SISR-GLPI.pdf">Fiche 2</button>
+                    </div>
+
+                    <div id="docViewer" class="cv-content doc-viewer" style="display: none;">
+                        <div class="doc-viewer-actions">
+                            <button id="docClose" type="button" class="btn btn-sm">Fermer</button>
+                        </div>
+                        <iframe id="docFrame" src="" width="100%" height="800px" frameborder="0"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -131,10 +158,35 @@
                     <a href="https://www.linkedin.com/in/yaniss-adjahoto-b30574350" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
-            <p>© 2025. Tous droits réservés.</p>
+            <p>© 2026. Tous droits réservés.</p>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        (function () {
+            const viewer = document.getElementById('docViewer');
+            const frame = document.getElementById('docFrame');
+            const closeBtn = document.getElementById('docClose');
+            const buttons = document.querySelectorAll('[data-doc]');
+
+            function openDoc(src) {
+                frame.src = src;
+                viewer.style.display = 'block';
+                viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            function closeDoc() {
+                viewer.style.display = 'none';
+                frame.src = '';
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => openDoc(btn.getAttribute('data-doc')));
+            });
+
+            closeBtn.addEventListener('click', closeDoc);
+        })();
+    </script>
 </body>
-</html> 
+</html>

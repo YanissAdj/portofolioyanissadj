@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétence C5 | Yaniss ADJAHOTO</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-background">
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Y.A</a>
+            <div class="nav-links">
+                <a href="about.html">À propos</a>
+                <a href="bts-sio.html">BTS SIO</a>
+                <a href="epreuve-e5.html">Épreuve E5</a>
+                <a href="epreuve-e6.html">Épreuve E6</a>
+                <a href="veille.html">Veille Technologique</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- C5 Section -->
+    <section class="competence">
+        <div class="container">
+            <h2 class="section-title">Compétence C5</h2>
+
+            <div class="competence-content">
+                <h3>Bloc 1 : Gérer le patrimoine informatique</h3>
+                <h4>C5 : Réaliser des backups(sauvegardes) de la base de données de GLPI</h4>
+
+                <h5>Objectif</h5>
+                <p>Sauvegarder et restaurer une base de données.</p>
+
+                <h5>Conditions préalables</h5>
+                <p>Avoir un serveur GLPI opérationnel.</p>
+
+                <h5>Considérations techniques</h5>
+                <p>La sauvegarde des données de la base MySQL de GLPI est indispensable. Cela peut se faire manuellement ou de manière automatique en planifiant les sauvegardes.</p>
+
+                <h5>Étapes</h5>
+                <h6>Manuellement</h6>
+                <ul>
+                    <li>Identifier les infos de la base GLPI</li>
+                </ul>
+
+                <p>Dans le serveur, regarder le fichier :</p>
+                <pre><code>/var/www/glpi/config/config_db.php</code></pre>
+
+                <p>On y trouvera :</p>
+                <ul>
+                    <li>nom de la base (dbdefault)</li>
+                    <li>utilisateur (dbuser)</li>
+                    <li>mot de passe (dbpassword)</li>
+                </ul>
+
+                <ul>
+                    <li>Commande de sauvegarde :</li>
+                </ul>
+
+                <pre><code>mysqldump -u utilisateur -p nom_base > sauvegarde_glpi.sql</code></pre>
+
+                <p><strong>Compressé (Recommandé)</strong></p>
+                <pre><code>mysqldump -u utilisateur -p nom_base | gzip > backup_glpi.sql.gz</code></pre>
+
+                <img src="images/GLPI_15.png" alt="Sauvegarde manuelle GLPI" class="competence-image">
+                <img src="images/GLPI_16.png" alt="Sauvegarde compressée GLPI" class="competence-image">
+
+                <h6>Automatiser</h6>
+                <ul>
+                    <li>Pour automatiser tous les jours à 2h :</li>
+                </ul>
+
+                <pre><code>crontab -e</code></pre>
+
+                <p>Ajouter :</p>
+                <pre><code>0 2 * * * mysqldump -u utilisateur -pTON_MDP nom_base | gzip > /backup/glpi_$(date +\%F).sql.gz</code></pre>
+
+                <img src="images/GLPI_17.png" alt="Sauvegarde automatique GLPI" class="competence-image">
+
+                <h6>Où se trouve ta sauvegarde ?</h6>
+                <p>La sauvegarde est enregistrée exactement là où on a tapé la commande.</p>
+
+                <h5>Restauration</h5>
+                <pre><code>mysql -u utilisateur -p nom_base < backup_glpi.sql</code></pre>
+
+                <p>ou avec gzip :</p>
+                <pre><code>gunzip < backup_glpi.sql.gz | mysql -u utilisateur -p nom_base</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Y.A</div>
+                <div class="social-links">
+                    <a href="https://github.com/YanissAdj" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/yaniss-adjahoto-b30574350" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <p>© 2026. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

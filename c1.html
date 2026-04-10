@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétence C1 | Yaniss ADJAHOTO</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-background">
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Y.A</a>
+            <div class="nav-links">
+                <a href="about.html">À propos</a>
+                <a href="bts-sio.html">BTS SIO</a>
+                <a href="epreuve-e5.html">Épreuve E5</a>
+                <a href="epreuve-e6.html">Épreuve E6</a>
+                <a href="veille.html">Veille Technologique</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- C1 Section -->
+    <section class="competence">
+        <div class="container">
+            <h2 class="section-title">Compétence C1</h2>
+
+            <div class="competence-content">
+                <h3>Bloc 1 : Gérer le patrimoine informatique</h3>
+                <h4>C1 : Recensement du parc informatique avec GLPI</h4>
+
+                <h5>Objectifs</h5>
+                <ul>
+                    <li>Recenser et identifier toutes les ressources numériques du groupe (machines hôtes et VM).</li>
+                    <li>Travailler en mode gestion de projet.</li>
+                    <li>Exporter et présenter l'inventaire final via GLPI.</li>
+                </ul>
+
+                <h5>Configuration des machines</h5>
+                <ul>
+                    <li>Créer 1 VM sur son ordinateur.</li>
+                    <li>L'ordinateur hôte est également inventorié.</li>
+                    <li>Total : 2 machines (1 hôte + 1 VM).</li>
+                    <li>La machine servira de serveur GLPI.</li>
+                </ul>
+
+                <h5>Agents GLPI</h5>
+                <ul>
+                    <li>Installer l'agent GLPI sur toutes les machines (hôte + VM).</li>
+                    <li>Lancer les inventaires vers le serveur GLPI.</li>
+                </ul>
+
+                <h5>Étapes</h5>
+                <h6>Installation automatique de GLPI</h6>
+                <ul>
+                    <li>Créer un fichier installglpi.sh exécutable avec les droits nécessaires.</li>
+                    <li>Copier à l'intérieur le script suivant :</li>
+                </ul>
+
+                <pre><code>#!/bin/bash
+
+echo "=== Installation automatique de GLPI ==="
+
+# Variables
+GLPI_VERSION="10.0.20"
+DB_NAME="glpi"
+DB_USER="glpiuser"
+DB_PASS="admin"
+SERVER_NAME="glpi.localhost"
+
+# Mise à jour du système
+apt update && apt -y upgrade
+
+# Installation Apache
+apt install -y apache2
+systemctl enable apache2
+systemctl start apache2
+
+# Installation dépendances PHP
+apt install -y lsb-release ca-certificates apt-transport-https curl
+
+curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb
+dpkg -i /tmp/debsuryorg-archive-keyring.deb
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
+
+apt update
+
+apt install -y php8.3 php8.3-cli php8.3-common php8.3-mysql php8.3-gd php8.3-intl \
+php8.3-xml php8.3-mbstring php8.3-curl php8.3-zip php8.3-bz2 php8.3-ldap \
+php8.3-opcache php8.3-exif
+
+# Redémarrage Apache
+systemctl restart apache2
+
+# Installation MariaDB
+apt install -y mariadb-server
+systemctl enable mariadb
+systemctl start mariadb
+
+# Création base de données GLPI
+mysql &lt;&lt;EOF
+CREATE DATABASE $DB_NAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';
+GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';
+FLUSH PRIVILEGES;
+EOF
+
+# Téléchargement GLPI
+cd /tmp
+wget https://github.com/glpi-project/glpi/releases/download/$GLPI_VERSION/glpi-$GLPI_VERSION.tgz
+
+# Décompression
+tar -xvzf glpi-$GLPI_VERSION.tgz
+mv glpi /var/www/
+
+# Droits Apache
+chown -R www-data:www-data /var/www/glpi
+chmod -R 755 /var/www/glpi
+
+# Activation rewrite Apache
+a2enmod rewrite
+
+# Virtual Host GLPI
+cat &lt;&lt;EOF > /etc/apache2/sites-available/glpi.conf
+&lt;VirtualHost *:80>
+    ServerName $SERVER_NAME
+    DocumentRoot /var/www/glpi/public
+
+    &lt;Directory /var/www/glpi/public>
+        Require all granted
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^(.*)$ index.php [QSA,L]
+    &lt;/Directory>
+&lt;/VirtualHost>
+EOF
+
+a2ensite glpi.conf
+a2dissite 000-default.conf
+
+# Sécurisation cookies PHP
+sed -i 's/;session.cookie_httponly =/session.cookie_httponly = On/' /etc/php/8.3/apache2/php.ini
+
+# Redémarrage Apache
+systemctl reload apache2
+
+echo "=== Installation terminée ==="
+echo "Accède à GLPI via : http://$(hostname -I | awk '{print $1}')"
+echo "Base de données : $DB_NAME"
+echo "Utilisateur DB : $DB_USER"</code></pre>
+
+                <h6>Configuration</h6>
+                <ul>
+                    <li>On ouvre un navigateur et on entre notre adresse IP. On obtient cette interface</li>
+                </ul>
+
+                <img src="images/GLPI_1.png" alt="Interface GLPI 1" class="competence-image">
+
+                <ul>
+                    <li>On choisit Français puis on clique sur OK puis sur continuer et installer. On arrive à cette étape</li>
+                </ul>
+
+                <img src="images/GLPI_2.png" alt="Interface GLPI 2" class="competence-image">
+
+                <ul>
+                    <li>On installe les modules manquants avec :</li>
+                </ul>
+
+                <pre><code>sudo apt install php-intl -y
+sudo systemctl restart apache2</code></pre>
+
+                <ul>
+                    <li>Une fois que tout est ok, on clique sur continuer et on renseigne glpi.localhost comme hôte, et on utilise glpiuser ainsi que le mot de passe qu'on a configuré précédemment.</li>
+                    <li>On se connecte avec les identifiants :</li>
+                </ul>
+
+                <p><strong>Id :</strong> glpi<br>
+                <strong>Mdp :</strong> glpi</p>
+
+                <p>Et on arrive sur l'interface de GLPI</p>
+
+                <img src="images/GLPI_3.png" alt="Interface GLPI 3" class="competence-image">
+
+                <ul>
+                    <li>On change les password de tous les Utilisateurs</li>
+                    <li>On modifie le fichier : /etc/php/8.3/apache2/php.ini et on met session.cookie_httponly = On</li>
+                </ul>
+
+                <h6>Recensement</h6>
+                <ul>
+                    <li>On commence d'abord par installé GLPI Inventory en allant dans le marketplace, en s'enregistrant puis en récupérant la clé d'enregistrement</li>
+                </ul>
+
+                <img src="images/GLPI_4.png" alt="Interface GLPI 4" class="competence-image">
+
+                <ul>
+                    <li>On télécharge puis installe GLPI Inventory puis on l'active.</li>
+                </ul>
+
+                <img src="images/GLPI_5.png" alt="Interface GLPI 5" class="competence-image">
+
+                <ul>
+                    <li>Une fois GLPI Inventory installé on installe l'agent GLPI sur Linux et Windows</li>
+                </ul>
+
+                <p><strong>Linux</strong></p>
+                <pre><code>wget https://github.com/glpi-project/glpi-agent/releases/download/1.17/glpi-agent-1.17-linux-installer.pl
+chmod +x glpi-agent-1.17-linux-installer.pl
+./glpi-agent-1.17-linux-installer.pl</code></pre>
+
+                <p><strong>Windows</strong></p>
+                <p>Via cette url : <a href="https://github.com/glpi-project/glpi-agent/releases" target="_blank">https://github.com/glpi-project/glpi-agent/releases</a></p>
+
+                <ul>
+                    <li>On peut maintenant lancé un inventaire</li>
+                </ul>
+
+                <p><strong>Linux</strong></p>
+                <pre><code>glpi-agent --server http://IP_DU_SERVEUR/front/inventory.php</code></pre>
+
+                <p><strong>Windows</strong></p>
+                <pre><code>.\glpi-agent.bat --server http://192.168.14.134/front/inventory.php
+Completé --force si nécessaire</code></pre>
+
+                <img src="images/GLPI_6.png" alt="Interface GLPI 6" class="competence-image">
+                <img src="images/GLPI_7.png" alt="Interface GLPI 7" class="competence-image">
+
+                <ul>
+                    <li>On voit que les machines ont été bien Inventorié !!!</li>
+                </ul>
+
+                <img src="images/GLPI_8.png" alt="Interface GLPI 8" class="competence-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Y.A</div>
+                <div class="social-links">
+                    <a href="https://github.com/YanissAdj" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/yaniss-adjahoto-b30574350" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <p>© 2026. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

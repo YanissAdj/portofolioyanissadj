@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétence C3 | Yaniss ADJAHOTO</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-background">
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Y.A</a>
+            <div class="nav-links">
+                <a href="about.html">À propos</a>
+                <a href="bts-sio.html">BTS SIO</a>
+                <a href="epreuve-e5.html">Épreuve E5</a>
+                <a href="epreuve-e6.html">Épreuve E6</a>
+                <a href="veille.html">Veille Technologique</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- C3 Section -->
+    <section class="competence">
+        <div class="container">
+            <h2 class="section-title">Compétence C3</h2>
+
+            <div class="competence-content">
+                <h3>Bloc 1 : Gérer le patrimoine informatique</h3>
+                <h4>C3 : Gérer les niveaux d'habilitations (droits) sur GLPI</h4>
+
+                <h5>Contexte</h5>
+                <p>
+                    Dans GLPI, les <strong>habilitations</strong> permettent de définir ce que chaque utilisateur peut faire ou voir. Chaque utilisateur se voit attribuer un <strong>profil</strong> sur une <strong>entité</strong> donnée. Cette gestion des droits est essentielle pour sécuriser l'accès aux données et respecter les responsabilités de chacun.
+                </p>
+
+                <h5>Les profils disponibles dans GLPI</h5>
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Profil</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Super-Admin</strong></td>
+                            <td>Accès total à toutes les fonctionnalités</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Admin</strong></td>
+                            <td>Administration complète sauf configuration globale</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technician</strong></td>
+                            <td>Gestion des tickets, du parc et des interventions</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Observer</strong></td>
+                            <td>Lecture seule sur l'ensemble du parc</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Self-Service</strong></td>
+                            <td>Accès au portail utilisateur uniquement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Post-only</strong></td>
+                            <td>Création de tickets uniquement</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h6>Étape 1 — Accéder à la liste des utilisateurs</h6>
+                <p>Depuis le menu principal : <strong>Administration → Utilisateurs</strong></p>
+                <p>La liste affiche tous les comptes existants avec leur identifiant, nom, courriel et statut actif.</p>
+
+                <img src="images/GLPI_9.png" alt="Liste des utilisateurs GLPI" class="competence-image">
+
+                <h6>Étape 2 — Ajouter un utilisateur</h6>
+                <p>Cliquez sur <strong>Ajouter un utilisateur</strong></p>
+                <p>La fiche utilisateur s'affiche avec toutes les champs d'informations : identifiant, nom, prénom, mot de passe, statut actif, etc. Remplir et créer l'utilisateur.</p>
+
+                <img src="images/GLPI_12.png" alt="Formulaire d'ajout d'utilisateur" class="competence-image">
+
+                <h6>Étape 3 — Accéder à l'onglet Habilitations</h6>
+                <p>Dans le menu latéral gauche, cliquez sur <strong>Habilitations</strong>.</p>
+                <p>Cet onglet affiche les profils actuellement attribués à l'utilisateur sur chaque entité.</p>
+
+                <img src="images/GLPI_10.png" alt="Onglet Habilitations" class="competence-image">
+
+                <h6>Étape 4 — Ajouter une nouvelle habilitation</h6>
+                <p>Pour ajouter un profil supplémentaire à l'utilisateur, utilisez le formulaire en haut de la section <strong>Habilitations</strong> :</p>
+                <ul>
+                    <li><strong>Entité</strong> → <code>Entité racine</code></li>
+                    <li><strong>Profil</strong> → choisissez le profil souhaité (ex: <code>Observer</code>)</li>
+                    <li><strong>Récursif</strong> → <code>Non</code> ou <code>Oui</code> selon si le profil doit s'appliquer aux sous-entités</li>
+                </ul>
+                <p>Cliquez ensuite sur <strong>Ajouter</strong>.</p>
+
+                <img src="images/GLPI_13.png" alt="Formulaire d'ajout d'habilitation" class="competence-image">
+
+                <h6>Étape 5 — Résultat après ajout de plusieurs profils</h6>
+                <p>Après avoir ajouté plusieurs habilitations, l'utilisateur Alice dispose de trois profils :</p>
+                <ul>
+                    <li><strong>Observer</strong> sur l'Entité racine</li>
+                    <li><strong>Self-Service</strong> sur l'Entité racine</li>
+                    <li><strong>Technician (R)</strong> sur l'Entité racine (récursif)</li>
+                </ul>
+
+                <img src="images/GLPI_11.png" alt="Résultat avec plusieurs profils attribués" class="competence-image">
+
+                <h6>Étape 6 — Vérifier dans la liste des utilisateurs</h6>
+                <p>De retour dans <strong>Administration → Utilisateurs</strong>, on constate que l'utilisateur <strong>Alice A</strong> apparaît bien dans la liste avec son compte actif.</p>
+
+                <img src="images/GLPI_14.png" alt="Utilisateur dans la liste" class="competence-image">
+
+                <h5>Bonnes pratiques</h5>
+                <ul>
+                    <li>Attribuez toujours le <strong>profil le moins privilégié</strong> nécessaire pour le rôle de l'utilisateur.</li>
+                    <li>Utilisez le mode <strong>Récursif</strong> uniquement si l'utilisateur doit accéder à toutes les sous-entités.</li>
+                    <li>Évitez de donner le profil <strong>Super-Admin</strong> à plusieurs utilisateurs.</li>
+                    <li>Supprimez les habilitations inutiles via <strong>Actions → Supprimer</strong> dans l'onglet Habilitations.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Y.A</div>
+                <div class="social-links">
+                    <a href="https://github.com/YanissAdj" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/yaniss-adjahoto-b30574350" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <p>© 2026. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

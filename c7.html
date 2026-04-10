@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétence C7 | Yaniss ADJAHOTO</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-background">
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Y.A</a>
+            <div class="nav-links">
+                <a href="about.html">À propos</a>
+                <a href="bts-sio.html">BTS SIO</a>
+                <a href="epreuve-e5.html">Épreuve E5</a>
+                <a href="epreuve-e6.html">Épreuve E6</a>
+                <a href="veille.html">Veille Technologique</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- C7 Section -->
+    <section class="competence">
+        <div class="container">
+            <h2 class="section-title">Compétence C7</h2>
+
+            <div class="competence-content">
+                <h3>Bloc 2 : Répondre aux incidents et aux demandes d'assistance et d'évolution</h3>
+                <h4>C5 : Paramétrer la gestion de tickets sur GLPI</h4>
+
+                <h5>Contexte</h5>
+                <p>
+                    Ce TP a pour objectif de mettre en place une gestion complète des tickets dans GLPI en suivant les bonnes pratiques ITIL. Il couvre la création des utilisateurs, des entités, des catégories et des règles d'affectation automatique.
+                </p>
+
+                <h5>Partie 1 — Préparation : nettoyage des utilisateurs par défaut</h5>
+                <p>Avant de commencer, il est recommandé de supprimer les comptes inutiles pour sécuriser l'application.</p>
+
+                <p><strong>Administration → Utilisateurs</strong></p>
+
+                <p>Les utilisateurs à <strong>conserver</strong> sont :</p>
+                <ul>
+                    <li><code>glpi</code></li>
+                    <li><code>glpi-system</code></li>
+                    <li><code>Plugin_GLPI_Inventory</code></li>
+                </ul>
+
+                <p>Les comptes <code>normal</code>, <code>post-only</code> et <code>tech</code> peuvent être supprimés ou désactivés.</p>
+
+                <img src="images/GLPI_18.png" alt="Liste des utilisateurs par défaut" class="competence-image">
+                <img src="images/GLPI_19.png" alt="Nettoyage des utilisateurs" class="competence-image">
+
+                <h5>Partie 2 — Niveau 1 : Créer les premiers utilisateurs</h5>
+
+                <h6>2.1 — Créer le technicien TechnicienParis</h6>
+                <p><strong>Administration → Utilisateurs → Ajouter</strong></p>
+
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Champ</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Identifiant</strong></td>
+                            <td><code>TechParis</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nom de famille</strong></td>
+                            <td><code>TechnicienParis</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prénom</strong></td>
+                            <td><code>TechnicienParis</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mot de passe</strong></td>
+                            <td><code>Admin1234!</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Actif</strong></td>
+                            <td><code>Oui</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <img src="images/GLPI_20.png" alt="Création du technicien Paris" class="competence-image">
+
+                <h6>2.2 — Créer les employés Self-Service</h6>
+                <p>De la même façon, créer les utilisateurs <code>employéParis1</code> et <code>employéParis2</code> avec le profil <strong>Self-Service</strong>.</p>
+
+                <img src="images/GLPI_25.png" alt="Création des employés Self-Service" class="competence-image">
+
+                <h5>Partie 3 — Niveau 2 : Créer l'entité Paris</h5>
+
+                <h6>3.1 — Créer l'entité</h6>
+                <p><strong>Administration → Entités → Ajouter</strong></p>
+
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Champ</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nom</strong></td>
+                            <td><code>Paris</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comme enfant de</strong></td>
+                            <td><code>Entité racine</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Commentaires</strong></td>
+                            <td><code>Paris</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>Cliquer sur <strong>Ajouter</strong>.</p>
+
+                <img src="images/GLPI_24.png" alt="Création de l'entité Paris" class="competence-image">
+
+                <h6>3.2 — Vérifier les entités créées</h6>
+                <p>Après avoir créé les entités Paris et Lyon, la liste doit afficher :</p>
+                <ul>
+                    <li>Entité racine</li>
+                    <li>Entité racine > Lyon</li>
+                    <li>Entité racine > Paris</li>
+                </ul>
+
+                <h6>3.3 — Rattacher les utilisateurs à l'entité Paris</h6>
+                <p>Pour chaque utilisateur Paris, aller dans <strong>Habilitations</strong> et assigner l'entité <strong>Paris</strong> avec le profil correspondant.</p>
+
+                <h5>Partie 4 — Niveau 3 : Entité Lyon et tickets</h5>
+
+                <h6>4.1 — Créer les utilisateurs Lyon</h6>
+                <p>Créer les techniciens <code>techLyon1</code>, <code>techLyon2</code> et les employés <code>empLyon1</code>, <code>empLyon2</code>, <code>empLyon3</code> rattachés à l'entité <strong>Lyon</strong>.</p>
+
+                <h6>4.2 — Connexion avec un employé Paris</h6>
+                <p>Se déconnecter puis se connecter avec <code>employéParis1</code>. Le portail Self-Service s'affiche avec la liste des tickets.</p>
+
+                <img src="images/GLPI_21.png" alt="Portail Self-Service" class="competence-image">
+                <img src="images/GLPI_22.png" alt="Interface Self-Service" class="competence-image">
+
+                <h6>4.3 — Créer un ticket depuis le portail</h6>
+                <p>Cliquer sur <strong>+ Créer un ticket</strong> et remplir le formulaire.</p>
+
+                <h6>4.4 — Résolution du ticket par TechnicienParis</h6>
+                <p>Se connecter avec <code>TechnicienParis</code> → aller dans <strong>Assistance → Tickets</strong> → ouvrir le ticket → ajouter une solution et clore le ticket.</p>
+
+                <img src="images/GLPI_23.png" alt="Résolution du ticket" class="competence-image">
+
+                <h6>4.5 — Tickets créés par les employés Lyon</h6>
+                <p>Chaque self-service Lyon crée un ticket. Vérifier qu'ils apparaissent bien dans l'entité Lyon.</p>
+
+                <img src="images/GLPI_26.png" alt="Tickets de l'entité Lyon" class="competence-image">
+
+                <h5>Partie 5 — Niveau 4 : Catégories ITIL et règles d'affectation</h5>
+
+                <h6>5.1 — Créer les catégories ITIL dans l'entité Paris</h6>
+                <p><strong>Configuration → Intitulés → Catégories de tickets → Ajouter</strong></p>
+
+                <p>Créer les 4 catégories suivantes en sélectionnant l'entité <strong>Paris</strong> :</p>
+
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Catégorie</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>Réseau</code></td>
+                            <td>Incidents liés au réseau (switch, Wi-Fi, VPN)</td>
+                        </tr>
+                        <tr>
+                            <td><code>Logiciel</code></td>
+                            <td>Problèmes applicatifs et système</td>
+                        </tr>
+                        <tr>
+                            <td><code>Matériel</code></td>
+                            <td>PC, imprimantes, périphériques</td>
+                        </tr>
+                        <tr>
+                            <td><code>Comptes et droits</code></td>
+                            <td>Création de comptes, réinitialisation de mots de passe</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h6>5.2 — Créer la règle d'affectation automatique</h6>
+                <p><strong>Administration → Règles → Règles d'affectation des tickets → Ajouter</strong></p>
+
+                <p><strong>Informations générales :</strong></p>
+
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Champ</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nom</strong></td>
+                            <td><code>Affectation Réseau → TechnicienParis</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Entité</strong></td>
+                            <td><code>Paris</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Actif</strong></td>
+                            <td><code>Oui</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Critère :</strong></p>
+
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Critère</th>
+                            <th>Condition</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>Catégorie</code></td>
+                            <td><code>est</code></td>
+                            <td><code>Réseau</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Action :</strong></p>
+
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Opération</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>Technicien assigné</code></td>
+                            <td><code>Assigner</code></td>
+                            <td><code>TechnicienParis</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h6>5.3 — Tester la règle avec employe2Paris</h6>
+                <p>Se connecter avec <code>employéParis2</code> → créer un nouveau ticket :</p>
+
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Champ</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Type</strong></td>
+                            <td><code>Incident</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Catégorie</strong></td>
+                            <td><code>Réseau</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Urgence</strong></td>
+                            <td><code>Moyenne</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Titre</strong></td>
+                            <td><code>Problème réseau</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Description</strong></td>
+                            <td><code>Problème de switch</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <img src="images/GLPI_27.png" alt="Création du ticket test 1" class="competence-image">
+                <img src="images/GLPI_28.png" alt="Création du ticket test 2" class="competence-image">
+
+                <h5>Résumé du cycle de vie d'un ticket</h5>
+                <pre><code>Création (Self-Service)
+        ↓
+Nouveau
+        ↓
+Attribution automatique (règle d'affectation)
+        ↓
+En cours (Attribué)
+        ↓
+Résolution (Technicien)
+        ↓
+Résolu
+        ↓
+Clôture
+        ↓
+Clos</code></pre>
+
+                <h5>Tableau récapitulatif des utilisateurs créés</h5>
+                <table class="competence-table">
+                    <thead>
+                        <tr>
+                            <th>Utilisateur</th>
+                            <th>Profil</th>
+                            <th>Entité</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>TechnicienParis</code></td>
+                            <td>Technician</td>
+                            <td>Paris</td>
+                        </tr>
+                        <tr>
+                            <td><code>employéParis1</code></td>
+                            <td>Self-Service</td>
+                            <td>Paris</td>
+                        </tr>
+                        <tr>
+                            <td><code>employéParis2</code></td>
+                            <td>Self-Service</td>
+                            <td>Paris</td>
+                        </tr>
+                        <tr>
+                            <td><code>techLyon1</code></td>
+                            <td>Technician</td>
+                            <td>Lyon</td>
+                        </tr>
+                        <tr>
+                            <td><code>techLyon2</code></td>
+                            <td>Technician</td>
+                            <td>Lyon</td>
+                        </tr>
+                        <tr>
+                            <td><code>empLyon1</code></td>
+                            <td>Self-Service</td>
+                            <td>Lyon</td>
+                        </tr>
+                        <tr>
+                            <td><code>empLyon2</code></td>
+                            <td>Self-Service</td>
+                            <td>Lyon</td>
+                        </tr>
+                        <tr>
+                            <td><code>empLyon3</code></td>
+                            <td>Self-Service</td>
+                            <td>Lyon</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Y.A</div>
+                <div class="social-links">
+                    <a href="https://github.com/YanissAdj" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/yaniss-adjahoto-b30574350" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <p>© 2026. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

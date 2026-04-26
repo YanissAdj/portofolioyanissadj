@@ -31,68 +31,9 @@
     <section class="competence">
         <div class="container">
             <h2 class="section-title">Compétence C5</h2>
-
             <div class="competence-content">
-                <h3>Bloc 1 : Gérer le patrimoine informatique</h3>
-                <h4>C5 : Réaliser des backups(sauvegardes) de la base de données de GLPI</h4>
-
-                <h5>Objectif</h5>
-                <p>Sauvegarder et restaurer une base de données.</p>
-
-                <h5>Conditions préalables</h5>
-                <p>Avoir un serveur GLPI opérationnel.</p>
-
-                <h5>Considérations techniques</h5>
-                <p>La sauvegarde des données de la base MySQL de GLPI est indispensable. Cela peut se faire manuellement ou de manière automatique en planifiant les sauvegardes.</p>
-
-                <h5>Étapes</h5>
-                <h6>Manuellement</h6>
-                <ul>
-                    <li>Identifier les infos de la base GLPI</li>
-                </ul>
-
-                <p>Dans le serveur, regarder le fichier :</p>
-                <pre><code>/var/www/glpi/config/config_db.php</code></pre>
-
-                <p>On y trouvera :</p>
-                <ul>
-                    <li>nom de la base (dbdefault)</li>
-                    <li>utilisateur (dbuser)</li>
-                    <li>mot de passe (dbpassword)</li>
-                </ul>
-
-                <ul>
-                    <li>Commande de sauvegarde :</li>
-                </ul>
-
-                <pre><code>mysqldump -u utilisateur -p nom_base > sauvegarde_glpi.sql</code></pre>
-
-                <p><strong>Compressé (Recommandé)</strong></p>
-                <pre><code>mysqldump -u utilisateur -p nom_base | gzip > backup_glpi.sql.gz</code></pre>
-
-                <img src="images/GLPI_15.png" alt="Sauvegarde manuelle GLPI" class="competence-image">
-                <img src="images/GLPI_16.png" alt="Sauvegarde compressée GLPI" class="competence-image">
-
-                <h6>Automatiser</h6>
-                <ul>
-                    <li>Pour automatiser tous les jours à 2h :</li>
-                </ul>
-
-                <pre><code>crontab -e</code></pre>
-
-                <p>Ajouter :</p>
-                <pre><code>0 2 * * * mysqldump -u utilisateur -pTON_MDP nom_base | gzip > /backup/glpi_$(date +\%F).sql.gz</code></pre>
-
-                <img src="images/GLPI_17.png" alt="Sauvegarde automatique GLPI" class="competence-image">
-
-                <h6>Où se trouve ta sauvegarde ?</h6>
-                <p>La sauvegarde est enregistrée exactement là où on a tapé la commande.</p>
-
-                <h5>Restauration</h5>
-                <pre><code>mysql -u utilisateur -p nom_base < backup_glpi.sql</code></pre>
-
-                <p>ou avec gzip :</p>
-                <pre><code>gunzip < backup_glpi.sql.gz | mysql -u utilisateur -p nom_base</code></pre>
+                <p><a href="epreuve-e5.html" class="back-link">← Retour à la liste des compétences</a></p>
+                <iframe src="Compétences/C5.pdf" width="100%" height="850px" frameborder="0"></iframe>
             </div>
         </div>
     </section>
@@ -104,7 +45,6 @@
                 <div class="footer-logo">Y.A</div>
                 <div class="social-links">
                     <a href="https://github.com/YanissAdj" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/yaniss-adjahoto-b30574350" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             <p>© 2026. Tous droits réservés.</p>
